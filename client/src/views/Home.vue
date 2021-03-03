@@ -3,7 +3,7 @@
      <nav class="level">
        <div class="level-left">
           <p class="level-item title is-2 has-text-centered">
-              <a class="link is-info is-large">My Fitness Tracker</a>
+              <a class="link is-info is-large">Exercise Tracker</a>
           </p>
         </div>
         <div class="level-right subtitle is-bold right-content">
