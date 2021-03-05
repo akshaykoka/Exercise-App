@@ -19,6 +19,7 @@ const routes = [
     name: 'User',
     component: ()=> import('../views/User.vue')
   },
+  
   {
     path: '/about',
     name: 'About',
@@ -40,3 +41,8 @@ router.beforeEach( (to, from, next) => {
   if( to.meta.isSecret && !CurrentUser) next('/login');
   else next();
 });
+
+
+
+
+export default router
