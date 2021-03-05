@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
- <!--     <router-link to="/" class="navbar-item is-size-4 has-text-weight-semibold">Crunch Fitness</router-link> -->
+ <!--     <router-link to="/" class="navbar-item is-size-4 has-text-weight-semibold">Fitness</router-link> -->
        <a class="navbar-item" href="https://bulma.io">
-      <img src="https://image.shutterstock.com/image-vector/logo-label-fitness-tracker-line-600w-526534807.jpg" width="112" height="28">
+       <img src="https://freepngimg.com/thumb/fitness/30355-6-fitness-transparent-background.png" width="112" height="28">
     </a>
       <a
         role="button"
