@@ -1,54 +1,75 @@
 <template>
-  <nav class="navbar is-link" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                  </a>
-                </div>
-                <div id="navbarBasicExample" class="navbar-menu">
-                  <div class="navbar-start">
-                    <router-link to="/Home" class="navbar-item">
-                      Home
-                    </router-link>
-                    <router-link to="/Profile" class="navbar-item">
-                      Profile
-                    </router-link>
-                    <router-link to="/Excersice Log" class="navbar-item">
-                      Excersice Log
-                    </router-link>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">
-                        More
-                      </a>
-                      <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                          About
-                        </a>
-                        <a class="navbar-item">
-                          Contact Us
-                        </a>
-                        <router-link to="/Issue" class="navbar-item">
-                          Report an issue
-                        </router-link>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                          Sign Out
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="navbar-end">
-                  </div>
-                </div>
-              </nav>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+ <!--     <router-link to="/" class="navbar-item is-size-4 has-text-weight-semibold">Crunch Fitness</router-link> -->
+       <a class="navbar-item" href="https://bulma.io">
+      <img src="https://image.shutterstock.com/image-vector/logo-label-fitness-tracker-line-600w-526534807.jpg" width="112" height="28">
+    </a>
+      <a
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarContent"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarContent" class="navbar-menu">
+      <div class="navbar-start">
+        <router-link class="navbar-item" to="/">Home</router-link>
+         <router-link to="/privatefeed" class="navbar-item" active-class="is-current">Private Feed</router-link>
+        <router-link class="navbar-item" to="/">About</router-link>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">More</a>
+          <div class="navbar-dropdown">
+            <a href="/" class="navbar-item">1</a>
+            <a href="/" class="navbar-item">2</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <div class="field w-24">
+            <div class="control">
+              <input class="input" type="text" placeholder="Search for people" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <router-link to="/Login" class="button is-primary">Sign in</router-link>
+            <router-link to="/SignUp" class="button is-primary">Sign up</router-link>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <span>Logged in user</span>
+          </a>
+          <div class="navbar-dropdown">
+            <router-link to="/User" class="navbar-item">My profile</router-link>
+            <router-link to="/" class="navbar-item">Sign out</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
 export default {
-}
+  name: "Navbar"
+};
 </script>
 
 <style>
+.w-24{
+  width: 24vw;
+}
 </style>

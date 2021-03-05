@@ -1,16 +1,13 @@
 <template>
   <div id="app">
-    <MyNav />
-    <div class="container">
-      <router-view/>
-    </div>
-
-
+    <MyNav></MyNav>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import MyNav from "./components/Nav";
+import MyNav from "@/components/Nav.vue";
+
 export default {
   components: {
     MyNav

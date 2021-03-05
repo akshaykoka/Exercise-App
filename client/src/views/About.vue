@@ -1,5 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+
+<section class="hero is-fullheight">
+        <div class="hero-head">
+            <the-navbar></the-navbar>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <dashboard/>
+            </div>
+        </div>
+
+        <div class="hero-foot">
+            <tab-navigation></tab-navigation>
+        </div>
+</section>
+
 </template>
