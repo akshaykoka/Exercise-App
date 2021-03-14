@@ -1,49 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import Home from '../views/Home.vue';
-import PrivateFeed from '../views/PrivateFeed.vue';
-import Login from '../views/Login.vue';
-import Signup from '../views/Signup.vue';
+import Home from "../views/Home.vue";
+import Login from "../views/Login.vue";
+import Signup from "../views/Signup.vue";
+import About from "../views/About.vue";
+import Dairy from "../views/Dairy";
 
-import { CurrentUser } from '../models/Users';
+import { CurrentUser } from "../models/Users";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/privatefeed', name: 'PrivateFeed', component: PrivateFeed , meta: { isSecret: true } },
-  { path: '/login', name: 'Login', component: Login },
-  { path: '/signup', name: 'Signup', component: Signup },
+  { path: "/", name: "Home", component: Home },
+  { path: "/login", name: "Login", component: Login },
+  { path: "/about", name: "About", component: About },
+  { path: "/signup", name: "Signup", component: Signup },
+  { path: "/dairy", name: "Dairy", component: Dairy },
   {
-    path: '/User',
-    name: 'User',
-    component: ()=> import('../views/User.vue')
+    path: "/User",
+    name: "User",
+    component: () => import("../views/User.vue"),
   },
-  
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
-
-router.beforeEach( (to, from, next) => {
-  if( to.meta.isSecret && !CurrentUser) next('/login');
+router.beforeEach((to, from, next) => {
+  if (to.meta.isSecret && !CurrentUser) next("/login");
   else next();
 });
 
-
-
-
-export default router
+export default router;

@@ -1,19 +1,25 @@
 <template>
   <div id="app">
-    <MyNav></MyNav>
-    <router-view/>
+    <div class="columns">
+      <div class="column is-one-fifth">
+        <SideNav />
+      </div>
+
+      <div class="column">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import MyNav from "@/components/Nav.vue";
+import SideNav from "@/components/SideNav.vue";
 
 export default {
   components: {
-    MyNav
-  }
-}
+    SideNav,
+  },
+};
 </script>
 
-<style lang="scss">
-</style>
+<style></style>
