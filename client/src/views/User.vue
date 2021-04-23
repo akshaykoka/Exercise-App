@@ -1,113 +1,131 @@
 <template>
   <div>
     <div class="section">
-      <div class="container">
-        <div class="box">
+      <div class="panel is-success">
+        <div class="panel-heading">
+          Profile
+        </div>
+        <form @submit.prevent="submit">
           <div class="profile-container">
-            <div class="image-container">
-              <figure>
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-                  alt="Profile picture"
-                />
-                <figcaption>
-                  <a>Change the profile picture</a>
-                </figcaption>
-              </figure>
+            <div class="panel-tab">
+              {{ error }}
+
+              <div>Username:</div>
+              <div>
+                <div class="field">
+                  <div class="control">
+                    <input class="input" type="text" v-model="form.userName" />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="profile-info-container">
-              <div class="profile-info-element">Username:</div>
-              <div class="profile-info-element">
-                {{ userName }}
+            <div class="panel-tab">
+              <div>First Name:</div>
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" v-model="form.firstName" />
+                </div>
               </div>
-              <div class="profile-info-element">Full name:</div>
-              <div class="profile-info-element">
-                {{ firstName + " " + lastName }}
+            </div>
+            <div class="panel-tab">
+              <div>Last Name:</div>
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" v-model="form.lastName" />
+                </div>
               </div>
-              <div class="profile-info-element">Email:</div>
-              <div class="profile-info-element">{{ email }}</div>
-              <div class="profile-info-element">Change Password:</div>
-              <div class="profile-info-element">
+            </div>
+            <div class="panel-tab">
+              <div>Email:</div>
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" v-model="form.email" />
+                </div>
+              </div>
+            </div>
+            <div class="panel-tab">
+              <div>Password:</div>
+              <div>
                 <div class="field">
                   <div class="control">
                     <input
                       class="input"
                       type="password"
                       placeholder="Change password"
+                      v-model="form.password"
                     />
                   </div>
                 </div>
               </div>
-              <div class="profile-info-element">Repeat Password:</div>
-              <div class="profile-info-element">
-                <div class="field">
-                  <div class="control">
-                    <input
-                      class="input"
-                      type="password"
-                      placeholder="Change password"
-                    />
-                  </div>
-                </div>
-                <div class="field is-grouped is-grouped-right">
-                  <button class="button is-danger">Change the password</button>
-                </div>
-              </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-centered custom-btn">
+              <button class="button is-link" type="submit">
+                Update Details
+              </button>
             </div>
           </div>
-        </div>
+
+          {{ message }}
+        </form>
       </div>
     </div>
+
     <br />
-    <div class="columns">
-      <div class="column">
-        <BMICalculator />
-      </div>
-      <div class="column">
-        <Timer />
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import BMICalculator from "../components/BMICalculator.vue";
-// import FoodAndExerciseInput from "../components/FoodAndExerciseInput";
-import Timer from "../components/Timer";
+import { mapGetters, mapActions } from "vuex";
 export default {
-  components: { BMICalculator, Timer },
+  components: {},
   name: "User",
   data() {
     return {
-      userName: "",
-      firstName: "",
-      lastName: "",
-      email: "",
+      form: {
+        userName: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      },
+      error: "",
+      message: "",
     };
   },
+  computed: {
+    ...mapGetters({ User: "StateUser" }),
+  },
   mounted() {
-    if (!sessionStorage.currentUser) {
-      this.$router.push("/login");
-    }
-    let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-    this.userName = currentUser.userName;
-    this.firstName = currentUser.firstName;
-    this.lastName = currentUser.lastName;
-    this.email = currentUser.email;
+    this.fillDetails();
+  },
+  methods: {
+    ...mapActions(["UpdateUser"]),
+    async submit() {
+      try {
+        await this.UpdateUser(this.form);
+        this.error = "";
+        this.message = "Details updated successfully";
+        this.clearform();
+      } catch (error) {
+        this.error = error.toString();
+      }
+    },
+    fillDetails() {
+      this.form.userName = this.User.userName;
+      this.form.firstName = this.User.firstName;
+      this.form.lastName = this.User.lastName;
+      this.form.email = this.User.email;
+    },
+    clearform() {
+      this.form.password = "";
+    },
   },
 };
 </script>
 <style>
-.profile-container {
-  display: grid;
-  grid-template-columns: 4fr 8fr;
-}
-.image-container {
-  padding: 12px;
-}
-.profile-info-container {
-  display: grid;
-  grid-template-columns: 4fr 8fr;
-  padding: 12px;
+.profile-container,
+.custom-btn {
+  padding: 10px;
 }
 </style>

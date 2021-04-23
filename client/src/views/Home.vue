@@ -12,16 +12,12 @@
 <script>
 import Feed from "../components/Feed";
 import SpotifyPlayer from "../components/SpotifyPlayer";
+
 export default {
   name: "Home",
   components: {
     Feed,
     SpotifyPlayer,
-  },
-  mounted() {
-    if (!sessionStorage.currentUser) {
-      this.$router.push("/login");
-    }
   },
 };
 </script>

@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-content">
                   <div class="content">
-                    <form class="container" @submit.prevent="login">
+                    <form class="container" @submit.prevent="submit">
                       {{ error }}
 
                       <!-- Email Field -->
@@ -19,11 +19,11 @@
                         <label for="email" class="label">Email</label>
                         <div class="control has-icons-left">
                           <input
-                            type="email"
-                            placeholder="name@domain.com"
+                            type="text"
+                            placeholder="akokaa"
                             class="input"
                             required
-                            v-model="email"
+                            v-model="form.userName"
                           />
                           <span class="icon is-small is-left">
                             <i class="fa fa-envelope"></i>
@@ -40,19 +40,12 @@
                             placeholder="*******"
                             class="input"
                             required
-                            v-model="password"
+                            v-model="form.password"
                           />
                           <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
-                      </div>
-                      <!-- Remember Me Field -->
-                      <div class="field">
-                        <label for="" class="checkbox">
-                          <input type="checkbox" />
-                          Remember me
-                        </label>
                       </div>
 
                       <!-- Login Button -->
@@ -76,57 +69,46 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Login",
   data() {
     return {
-      email: "",
-      password: "",
+      form: {
+        userName: "",
+        password: "",
+      },
       error: "",
     };
   },
-  mounted() {
-    // if the user is already logged in
-    if (sessionStorage.currentUser) {
-      this.$router.push("/");
-    }
-  },
+
   methods: {
-    areValdFields() {
-      if (this.email.length === 0) {
+    ...mapActions(["LogIn"]),
+    async submit() {
+      const User = {};
+      User.userName = this.form.userName;
+      User.password = this.form.password;
+      try {
+        if (this.areValidFields()) {
+          await this.LogIn(User);
+          this.$router.push("/");
+          this.error = "";
+        }
+      } catch (error) {
+        this.error = error.toString();
+      }
+    },
+    areValidFields() {
+      if (this.form.userName.length === 0) {
         this.error = "Please enter a email id";
         return false;
       }
-      if (this.password.length === 0) {
+      if (this.form.password.length === 0) {
         this.error = "Please enter your password";
         return false;
       }
       return true;
-    },
-    login() {
-      if (this.areValdFields()) {
-        // if there is no user available
-        if (!sessionStorage.currentUser) {
-          // search if there is a user with the currect email and password
-          const userList = JSON.parse(sessionStorage.getItem("userList"));
-          if (!userList) {
-            this.error = "The entered email or password is wrong";
-            return;
-          }
-          let noUserFound = true;
-          userList.forEach((user) => {
-            if (user.email === this.email && user.password === this.password) {
-              noUserFound = false;
-              const parsedCurrentUser = JSON.stringify(user);
-              sessionStorage.setItem("currentUser", parsedCurrentUser);
-              this.$router.push("/");
-            }
-            if (noUserFound) {
-              this.error = "The entered email or password is wrong";
-            }
-          });
-        }
-      }
     },
   },
 };

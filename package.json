@@ -1,0 +1,35 @@
+{
+  "name": "Exercise-App",
+  "version": "1.0.0",
+  "description": "Final Project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch server server/index.js",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshaykoka/Exercise-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshaykoka/Exercise-App/issues"
+  },
+  "homepage": "https://github.com/akshaykoka/Exercise-App#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

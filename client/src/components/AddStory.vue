@@ -7,12 +7,29 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <form @submit="addPost">
-              <!-- Post Field -->
+            <form @submit.prevent="submit">
+              <!-- Title Field -->
               <div class="field">
-                <label for class="label">Post</label>
+                <label for="title" class="label">Title</label>
                 <div class="control">
-                  <input type="text" class="input " v-model="content" />
+                  <input
+                    type="text"
+                    class="input "
+                    name="title"
+                    v-model="form.title"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="write-up">Content</label>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="input"
+                    name="write-up"
+                    v-model="form.write_up"
+                  />
                 </div>
               </div>
 
@@ -33,26 +50,28 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "AddStory",
   data() {
-    return { content: "" };
+    return {
+      form: {
+        title: "",
+        write_up: "",
+      },
+    };
   },
   methods: {
-    addPost() {
-      const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-      const feed = sessionStorage.feed
-        ? JSON.parse(sessionStorage.getItem("feed"))
-        : [];
-      feed.push({
-        firstName: currentUser.firstName,
-        lastName: currentUser.lastName,
-        userName: currentUser.userName,
-        content: this.content,
-      });
-      sessionStorage.setItem("feed", JSON.stringify(feed));
-
-      this.content = "";
+    ...mapActions(["CreatePost"]),
+    async submit() {
+      try {
+        await this.CreatePost(this.form);
+        this.form.title = "";
+        this.form.write_up = "";
+      } catch (error) {
+        throw "Sorry you can't make a post now!";
+      }
     },
   },
 };

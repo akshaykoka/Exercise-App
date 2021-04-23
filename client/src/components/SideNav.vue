@@ -15,10 +15,22 @@
             <router-link to="/User">My profile</router-link>
           </li>
           <li>
-            <router-link to="/dairy">Dairy</router-link>
+            <router-link to="/people">People</router-link>
           </li>
           <li>
-            <a v-on:click="signout" class="has-text-danger">Sign out</a>
+            <router-link to="/exercise">Exercise</router-link>
+          </li>
+          <li>
+            <router-link to="/food">Food</router-link>
+          </li>
+          <li>
+            <router-link to="/bmi">BMI</router-link>
+          </li>
+          <li>
+            <router-link to="/tools">Tools</router-link>
+          </li>
+          <li>
+            <a v-on:click="LogOut" class="has-text-danger">Sign out</a>
           </li>
           <br />
           <li>
@@ -42,6 +54,8 @@
 
 <script>
 import image from "../assets/logomk.png";
+import { mapActions } from "vuex";
+
 export default {
   name: "SideNav",
   data: function() {
@@ -50,8 +64,9 @@ export default {
     };
   },
   methods: {
-    signout() {
-      sessionStorage.removeItem("currentUser");
+    ...mapActions(["LogOut"]),
+    logout() {
+      this.LogOut();
       this.$router.push("/login");
     },
   },

@@ -9,7 +9,7 @@
             </div>
             <div class="card-content">
               <div class="content">
-                <form class="container" @submit.prevent="signUp">
+                <form class="container" @submit.prevent="submit">
                   {{ error }}
                   <!-- User Name Field-->
                   <div class="field">
@@ -19,7 +19,7 @@
                         type="text"
                         class="input"
                         placeholder="Your User Name"
-                        v-model="userName"
+                        v-model="form.userName"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -36,7 +36,7 @@
                         type="text"
                         class="input"
                         placeholder="Your First Name"
-                        v-model="firstName"
+                        v-model="form.firstName"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -53,7 +53,7 @@
                         type="text"
                         class="input"
                         placeholder="Your Last Name"
-                        v-model="lastName"
+                        v-model="form.lastName"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -70,7 +70,7 @@
                         type="email"
                         class="input"
                         placeholder="Your Email"
-                        v-model="email"
+                        v-model="form.email"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -87,7 +87,7 @@
                         type="password"
                         class="input"
                         placeholder="Password"
-                        v-model="password"
+                        v-model="form.password"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -104,7 +104,7 @@
                         type="password"
                         class="input"
                         placeholder="Re type password"
-                        v-model="rePassword"
+                        v-model="form.rePassword"
                         required
                       />
                       <span class="icon is-small is-left">
@@ -135,43 +135,52 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "SignUp",
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      userName: "",
-      email: "",
-      password: "",
-      rePassword: "",
+      form: {
+        firstName: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        password: "",
+        rePassword: "",
+      },
+
       error: "",
     };
   },
-  mounted() {
-    // if the user is already logged in
-    if (sessionStorage.currentUser) {
-      this.$router.push("/");
-    }
-  },
+
   methods: {
+    ...mapActions(["Register"]),
+    async submit() {
+      try {
+        await this.Register(this.form);
+        this.$router.push("/");
+        this.error = "";
+      } catch (error) {
+        this.error = error.toString();
+      }
+    },
     areValidFields() {
       const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       const regexPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
       // check if the first name is not empty
-      if (this.userName.length === 0) {
+      if (this.form.userName.length === 0) {
         this.error = "Please enter a user name";
         return false;
       }
 
       // check if the first name is not empty
-      if (this.firstName.length === 0) {
+      if (this.form.firstName.length === 0) {
         this.error = "Please enter your first name";
         return false;
       }
 
       // check if the last name is not empty
-      if (this.lastName.length === 0) {
+      if (this.form.lastName.length === 0) {
         this.error = "Please enter your last name";
         return false;
       }
@@ -195,33 +204,6 @@ export default {
       }
 
       return true;
-    },
-    signUp() {
-      let userList;
-      if (this.areValidFields()) {
-        // if there are no prior users
-        if (sessionStorage.getItem("userList")) {
-          userList = JSON.parse(sessionStorage.getItem("userList"));
-        }
-        if (!userList) userList = [];
-        const currentUser = {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          userName: this.userName,
-        };
-        userList.push(currentUser);
-
-        const parsedUserList = JSON.stringify(userList);
-        sessionStorage.setItem("userList", parsedUserList);
-
-        // set current user to the details given
-        const parsedCurrentUser = JSON.stringify(currentUser);
-        sessionStorage.setItem("currentUser", parsedCurrentUser);
-        // send the home route
-        this.$router.push("/");
-      }
     },
   },
 };

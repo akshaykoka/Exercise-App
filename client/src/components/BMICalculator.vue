@@ -1,75 +1,78 @@
 <template>
-  <div class="card">
-    <div class="card-heading">
-      <div class="card-header-title title is-centered">
-        BMI Calculator
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <h4>BMI - {{ bmi }} kg/m<sup>2</sup></h4>
-          <span :class="className" v-if="message">
-            {{ message }}
-          </span>
-          <span class="gray" v-else>
-            Enter your height and weight
-          </span>
-          <form @submit.prevent="calculateBMI">
-            <!-- Height Field -->
-            <div class="field">
-              <label for="height" class="label">Height (cm)</label>
-              <div class="control">
-                <input
-                  autocomplete="off"
-                  type="text"
-                  pattern="-?[0-9]*(\.[0-9]+)?"
-                  class="input "
-                  v-model="height"
-                />
-              </div>
-            </div>
-
-            <!-- Height Field -->
-            <div class="field">
-              <label for="weight" class="label">Weight (kg)</label>
-              <div class="control">
-                <input
-                  autocomplete="off"
-                  type="text"
-                  pattern="-?[0-9]*(\.[0-9]+)?"
-                  class="input "
-                  v-model="weight"
-                />
-              </div>
-            </div>
-
-            <!-- Login Button -->
-            <div class="field">
-              <p class="control">
-                <button class="button is-success w-100" type="submit">
-                  Calculate BMI
-                </button>
-              </p>
-            </div>
-          </form>
+  <div class="content">
+    <h4>BMI - {{ form.bmi }} kg/m<sup>2</sup></h4>
+    <span :class="className" v-if="message">
+      {{ message }}
+    </span>
+    <span class="gray" v-else>
+      Enter your height and weight
+    </span>
+    <form @submit.prevent="calculateBMI">
+      <!-- Height Field -->
+      <div class="field w-100">
+        <label for="height" class="label">Height (cm)</label>
+        <div class="control">
+          <input
+            autocomplete="off"
+            type="text"
+            pattern="-?[0-9]*(\.[0-9]+)?"
+            class="input "
+            v-model="form.height"
+          />
         </div>
       </div>
-    </div>
+
+      <!-- Height Field -->
+      <div class="field">
+        <label for="weight" class="label">Weight (kg)</label>
+        <div class="control">
+          <input
+            autocomplete="off"
+            type="text"
+            pattern="-?[0-9]*(\.[0-9]+)?"
+            class="input "
+            v-model="form.weight"
+          />
+        </div>
+      </div>
+
+      <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+          <button class="button is-link  w-100" type="submit">
+            Calculate BMI
+          </button>
+        </p>
+      </div>
+
+      <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+          <button class="button is-link  w-100" @click="upload">
+            Add to Logs
+          </button>
+        </p>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "BMICalculator",
   data() {
     return {
-      height: "",
-      weight: "",
-      bmi: "",
+      form: { height: "", weight: "", bmi: "" },
       message: "",
       className: "is-red",
     };
   },
   methods: {
+    ...mapActions(["AddBMI"]),
+    async upload() {
+      this.calculateBMI();
+      await this.AddBMI(this.form);
+      this.reset();
+    },
     isNumeric(input) {
       return !isNaN(parseFloat(input)) && isFinite(input);
     },
@@ -82,18 +85,18 @@ export default {
       return false;
     },
     reset() {
-      this.height = "";
-      this.weight = "";
-      this.bmi = "";
+      this.form.height = "";
+      this.form.weight = "";
+      this.form.bmi = "";
       this.message = "";
     },
     calculateBMI() {
-      if (this.isValid(this.height) && this.isValid(this.weight)) {
-        this.bmi = (
-          this.weight /
-          ((this.height / 100) * (this.height / 100))
+      if (this.isValid(this.form.height) && this.isValid(this.form.weight)) {
+        this.form.bmi = (
+          this.form.weight /
+          ((this.form.height / 100) * (this.form.height / 100))
         ).toFixed(2);
-        this.getBMIMessage(this.bmi);
+        this.getBMIMessage(this.form.bmi);
       }
     },
     getBMIMessage(number) {

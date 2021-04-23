@@ -1,23 +1,23 @@
 <template>
-  <form @submit="submit" class="w-100">
+  <form @submit.prevent="submit" class="w-100">
     {{ error }}
     <div class="container">
       <div class="field">
         <label for class="label">Excercise:</label>
         <div class="control">
-          <input type="text" class="input" v-model="exercise" />
+          <input type="text" class="input" v-model="form.name" />
         </div>
       </div>
       <div class="field">
         <label for class="label">Calories burnt:</label>
         <div class="control">
-          <input type="text" class="input" v-model="calories" />
+          <input type="text" class="input" v-model="form.calories" />
         </div>
       </div>
       <div class="field is-grouped is-grouped-centered">
         <div class="control">
           <button class="button is-link" type="submit">
-            Add to your daily limit
+            Add to Log
           </button>
         </div>
       </div>
@@ -26,41 +26,38 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "ExcerciseInputComponent",
   data() {
     return {
-      exercise: "",
-      calories: "",
+      form: { name: "", calories: "" },
       error: "",
     };
   },
   methods: {
+    ...mapActions(["AddExercise"]),
     validate() {
-      if (this.exercise.length === 0) {
+      if (this.form.name.length === 0) {
         this.error = " Please enter the exercise";
         return false;
       }
-      if (this.calories.length === 0) {
+      if (this.form.calories.length === 0) {
         this.error = " Please enter the calories";
         return false;
       }
       return true;
     },
-    submit() {
-      if (this.validate()) {
-        // get the current user
-        const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-        // get the exercise data
-        const exercises = sessionStorage.exercises
-          ? JSON.parse(sessionStorage.getItem("exercises"))
-          : [];
-        exercises.push({
-          email: currentUser.email,
-          exercise: this.exercise,
-          calories: this.calories,
-        });
-        sessionStorage.setItem("exercises", JSON.stringify(exercises));
+    async submit() {
+      try {
+        if (this.validate()) {
+          await this.AddExercise(this.form);
+          this.error = "";
+          this.form.name = "";
+          this.form.calories = "";
+        }
+      } catch (error) {
+        this.error = error.toString();
       }
     },
   },
