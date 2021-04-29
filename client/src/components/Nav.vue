@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a href="/" class="navbar-item">
-            <img :src="image" width="120" height="56" />
+            <img :src="image" width="180" height="84" />
           </a>
         </div>
         <div class="navbar-menu">
@@ -105,6 +105,6 @@ export default {
   width: 100%;
 }
 .navbar-item img {
-  max-height: 3rem !important;
+  max-height: 6rem !important;
 }
 </style>

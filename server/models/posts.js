@@ -2,20 +2,21 @@ const users = require("./users");
 
 const list = [
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
+    title: "Benifits of Intermeient fast",
+    write_up: "Intermient fasting is good for health and best",
     userName: "johnsmith",
   },
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
+    title: "Benifits of Intermeient fast",
+    write_up: "Intermient fasting is good for health and best",
     userName: "johnsmith",
   },
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
+    title: "Benifits of Intermeient fast",
+    write_up: "Intermient fasting is good for health and best",
     userName: "johnsmith",
   },
+ 
 ];
 
 const listWithOwner = () =>
