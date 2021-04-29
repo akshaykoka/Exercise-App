@@ -14,7 +14,7 @@ app
   .use(express.static("../doc"))
   .use(cors())
   .use(morgan("dev"))
-  .use("/", require("./routes"))
+  .use("/", require("./server/routes"))
   .use("/uploads", express.static(__dirname + "/uploads"))
 
   // All the way at the end of the pipeline. Return instead of not found
