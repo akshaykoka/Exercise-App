@@ -1,5 +1,6 @@
 <template>
-  <div class="columns is-vcentered is-centered signup-screen">
+  <div class="columns is-vcentered is-centered signup-screen ">
+    <div class="column"></div>
     <div class="column">
       <div class="section">
         <div class="container sign-up-container">
@@ -136,6 +137,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import img from "../assets/bg-img.jpg";
 export default {
   name: "SignUp",
   data() {
@@ -148,6 +150,7 @@ export default {
         password: "",
         rePassword: "",
       },
+      img: img,
 
       error: "",
     };
@@ -222,6 +225,7 @@ export default {
   background-color: #333 !important;
 }
 .signup-screen {
-  padding-top: 7vh;
+  background-image: url("../assets/bg-img.jpg");
+  background-repeat: no-repeat;
 }
 </style>

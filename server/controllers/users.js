@@ -1,3 +1,5 @@
+const upload = require("../config/multer");
+const fs = require("fs");
 const model = require("../models/users");
 
 const getUser = (req, res) => {
@@ -14,4 +16,27 @@ const updateUser = (req, res) => {
 };
 const deleteUser = (req, res) => res.send(model.Delete(req.params.user_id));
 
-module.exports = { getUser, getUserById, addUser, updateUser, deleteUser };
+const followUser = (req, res) =>
+  res.send(model.followUser(req.user.id, req.params.userName));
+const removeFollower = (req, res) =>
+  res.send(model.removeFollower(req.user.id, req.params.userName));
+const unfollowUser = (req, res) =>
+  res.send(model.removeFollowingUser(req.user.id, req.params.userName));
+
+const uploadAvatar = (req, res) => {
+  if (!req.file) return res.send("Image is not added");
+  const User = model.uploadAvatar(req.user.id, req.file.filename);
+  return res.send(User);
+};
+
+module.exports = {
+  getUser,
+  getUserById,
+  addUser,
+  updateUser,
+  deleteUser,
+  followUser,
+  unfollowUser,
+  removeFollower,
+  uploadAvatar,
+};

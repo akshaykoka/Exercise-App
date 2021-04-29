@@ -1,10 +1,11 @@
 <template>
   <div class="columns is-vcentered is-centered login-screen">
+    <div class="column"></div>
     <div class="column">
       <div class="columns is-vcentered is-centered is-three-quarters">
         <div class="column">
           <div class="section">
-            <div class="container sigin-container">
+            <div class="container signin-container">
               <div class="card">
                 <div class="card-heading">
                   <div class="card-header-title title">Sign In</div>
@@ -115,7 +116,8 @@ export default {
 </script>
 
 <style>
-.sign-up-container {
+.signin-container {
+  margin-top: 20vh;
   border-radius: 10px;
 }
 .w-100,
@@ -123,6 +125,8 @@ export default {
   width: 100%;
 }
 .login-screen {
-  padding-top: 20vh;
+  background-image: url("../assets/bg-img.jpg");
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 </style>

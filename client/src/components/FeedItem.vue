@@ -4,6 +4,7 @@
       <article class="media">
         <div class="media-content">
           <div class="content">
+            <img :src="imageUrl" alt="" />
             <h3>{{ post.title }}</h3>
             <p>{{ post.write_up }}</p>
             <span> @{{ post.userName }} </span>
@@ -17,6 +18,11 @@
 <script>
 export default {
   props: ["post"],
+  computed: {
+    imageUrl() {
+      return "http:localhost:3000/" + this.post.image;
+    },
+  },
 };
 </script>
 <style scoped>

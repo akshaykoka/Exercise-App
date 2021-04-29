@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../config/multer");
 const {
   getPostById,
   addPost,
@@ -10,7 +11,7 @@ const app = express.Router();
 app.get("/", getPost);
 app.get("/:post_id", getPostById);
 
-app.post("/", addPost);
+app.post("/", upload.single("file"), addPost);
 
 app.patch("/:post_id", updatePost);
 

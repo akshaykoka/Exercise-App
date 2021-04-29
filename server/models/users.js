@@ -14,6 +14,7 @@ const list = [
     password: "$2b$08$ovDdePT2UjP9nkMaOhpFgOQEsBclWpB9RfS2p5XZwq.vDIzwNw5ke",
     isAdmin: true,
     following: ["vp", "johnsmith"],
+    followers: [],
   },
   {
     firstName: "Kamala",
@@ -24,6 +25,7 @@ const list = [
     password: "Her",
     isAdmin: true,
     following: ["johnsmith"],
+    followers: [],
   },
   {
     firstName: "John",
@@ -34,6 +36,7 @@ const list = [
     password: "BeepBop",
     isAdmin: true,
     following: ["vp"],
+    followers: [],
   },
 ];
 
@@ -63,7 +66,7 @@ module.exports.Register = async (user) => {
     throw { code: 422, msg: "First Name is required" };
   }
 
-  list.push({ ...user, following: [], isAdmin: false });
+  list.push({ ...user, following: [], followers: [], isAdmin: false });
   return { ...user, password: undefined };
 };
 
@@ -122,12 +125,65 @@ module.exports.FromJWT = (token) => {
   }
 };
 
-module.exports.followUser = (user_id, userName) => {
-  try {
-    if (list[user_id].following.indexOf(userName) === -1) {
-      list[user_id].following.push(userName);
+const getUserIndexByName = (userName) => {
+  return list.map((e) => e.userName).indexOf(userName);
+};
 
-      return list[user_id];
-    }
-  } catch (error) {}
+module.exports.followUser = (user_id, userName) => {
+  // add the userName to following list
+  if (list[user_id].following.indexOf(userName) !== -1)
+    throw { code: 303, message: "The user is already being followed" };
+
+  // add the user username to followers list of the second account
+  const mainUserName = list[user_id].userName;
+  const secondUserIndex = getUserIndexByName(userName);
+  if (list[secondUserIndex].followers.indexOf(mainUserName) !== -1)
+    throw { code: 303, message: "The user is already a follower" };
+
+  list[user_id].following.push(userName);
+  list[secondUserIndex].followers.push(mainUserName);
+  return list[user_id];
+};
+
+module.exports.removeFollowingUser = (user_id, userName) => {
+  // remove the userName to following list
+  const insideFollowing = list[user_id].following.indexOf(userName);
+  if (insideFollowing === -1)
+    throw { code: 303, message: "The user is not being followed" };
+
+  const mainUserName = list[user_id].userName;
+  const secondUserIndex = getUserIndexByName(userName);
+
+  const insideFollowers = list[secondUserIndex].followers.indexOf(mainUserName);
+  if (insideFollowers === -1)
+    throw { code: 303, message: "The user is not a follower" };
+
+  list[user_id].following.splice(insideFollowing, 1);
+  list[secondUserIndex].followers.splice(insideFollowers, 1);
+
+  return list[user_id];
+};
+
+module.exports.removeFollower = (user_id, userName) => {
+  // remove the userName to following list
+  const insideFollowers = list[user_id].followers.indexOf(userName);
+  if (insideFollowers === -1)
+    throw { code: 303, message: "The user is not a follower" };
+
+  const mainUserName = list[user_id].userName;
+  const secondUserIndex = getUserIndexByName(userName);
+
+  const insideFollowing = list[secondUserIndex].following.indexOf(mainUserName);
+  if (insideFollowing === -1)
+    throw { code: 303, message: "The user is not following" };
+
+  list[user_id].followers.splice(insideFollowers, 1);
+  list[secondUserIndex].following.splice(insideFollowing, 1);
+
+  return list[user_id];
+};
+
+module.exports.uploadAvatar = function uploadAvatar(user_id, avatar) {
+  list[user_id].avatar = avatar;
+  return list[user_id];
 };

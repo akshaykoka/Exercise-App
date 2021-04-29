@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-success">
+    <section class="hero is-success ">
       <div class="hero-body ">
         <p class="title">
           Exercise Tracker
@@ -10,7 +10,7 @@
         </p>
       </div>
     </section>
-    <div class="box">
+    <div class="box container">
       <p>
         We started this tracker to enable people to be more active, motivated to
         be fit and healthy

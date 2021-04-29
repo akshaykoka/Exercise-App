@@ -8,7 +8,8 @@ import "@fortawesome/fontawesome-free/css/all.css";
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = process.env.VUE_APP_API_ROOT;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
 // axios.defaults.withCredentials = true;
 axios.interceptors.response.use(undefined, function(error) {
   if (error) {

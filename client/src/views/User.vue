@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="section">
       <div class="panel is-success">
         <div class="panel-heading">
@@ -72,13 +72,50 @@
     </div>
 
     <br />
+    <div class="section">
+      <div class="columns">
+        <div class="column">
+          <div class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <h3 class="heading">
+                  Followers
+                </h3>
+                <h2 class="title">{{ User.followers.length }}</h2>
+              </div>
+            </div>
+          </div>
+          <div v-for="(follower, index) in User.followers" :key="index">
+            <follower-card :userName="follower" />
+          </div>
+        </div>
+        <div class="is-divider-vertical" data-content="OR"></div>
+        <div class="column">
+          <div class="level">
+            <div class="level-item has-text-centered ">
+              <div>
+                <h3 class="heading">
+                  Following
+                </h3>
+                <h2 class="title">{{ User.following.length }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="is-divider"></div>
+          <div v-for="(following, index) in User.following" :key="index">
+            <follower-card :userName="following" :isFollower="false" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import FollowerCard from "../components/FollowerCard.vue";
 export default {
-  components: {},
+  components: { FollowerCard },
   name: "User",
   data() {
     return {

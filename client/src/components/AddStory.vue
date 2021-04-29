@@ -7,7 +7,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <form @submit.prevent="submit">
+            <form @submit.prevent="submit" enctype="multipart/form-data">
               <!-- Title Field -->
               <div class="field">
                 <label for="title" class="label">Title</label>
@@ -30,6 +30,29 @@
                     name="write-up"
                     v-model="form.write_up"
                   />
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="file has-name">
+                  <label class="file-label">
+                    <input
+                      type="file"
+                      class="file-input"
+                      name="image"
+                      ref="file"
+                      @change="onSelect"
+                    />
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">Choose a file...</span>
+                    </span>
+                    <span class="file-name">
+                      Screenshot
+                    </span>
+                  </label>
                 </div>
               </div>
 
@@ -57,6 +80,7 @@ export default {
   data() {
     return {
       form: {
+        file: null,
         title: "",
         write_up: "",
       },
@@ -64,9 +88,18 @@ export default {
   },
   methods: {
     ...mapActions(["CreatePost"]),
+    onSelect() {
+      const file = this.$refs.file.files[0];
+      this.form.file = file;
+    },
     async submit() {
       try {
-        await this.CreatePost(this.form);
+        const formData = new FormData();
+        formData.append("file", this.form.file);
+        formData.append("title", this.form.title);
+        formData.append("write_up", this.form.write_up);
+        console.log(formData.get("title"));
+        await this.CreatePost(formData);
         this.form.title = "";
         this.form.write_up = "";
       } catch (error) {

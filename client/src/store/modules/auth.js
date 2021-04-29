@@ -37,9 +37,11 @@ const actions = {
   },
   async CreatePost({ dispatch, getters }, post) {
     let token = getters.StateToken;
+    console.log(post.get("title"));
     if (token) {
       await axios.post("/posts", post, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -71,6 +73,35 @@ const actions = {
       await axios.patch(`/users/${user.id}`, User);
       await commit("setUser", User);
     }
+  },
+
+  async FollowUser({ commit, getters }, userName) {
+    const { data } = await axios.post(
+      `/users/follow/${userName}`,
+      {},
+      { headers: { Authorization: `Bearer ${getters.StateToken}` } }
+    );
+
+    if (data) await commit("setUser", data);
+    console.log(getters.StateUser);
+  },
+
+  async RemoveFollower({ commit, getters }, userName) {
+    const { data } = await axios.post(
+      `/users/remove/follower/${userName}`,
+      {},
+      { headers: { Authorization: `Bearer ${getters.StateToken}` } }
+    );
+    await commit("setUser", data);
+    console.log(getters.StateUser);
+  },
+  async UnfollowUser({ commit, getters }, userName) {
+    const { data } = await axios.post(
+      `/users/unfollow/${userName}`,
+      {},
+      { headers: { Authorization: `Bearer ${getters.StateToken}` } }
+    );
+    await commit("setUser", data);
   },
 
   async GetExercises({ commit, getters }) {

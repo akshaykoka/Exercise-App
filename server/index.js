@@ -10,10 +10,12 @@ const port = process.env.PORT || 3000;
 
 app
   .use(express.json())
+  .use(express.urlencoded({ extended: true }))
   .use(express.static("../doc"))
   .use(cors())
   .use(morgan("dev"))
   .use("/", require("./routes"))
+  .use("/uploads", express.static(__dirname + "/uploads"))
 
   // All the way at the end of the pipeline. Return instead of not found
   .get("*", (req, res) => {
@@ -24,7 +26,7 @@ app
     console.error(error);
 
     res.status(error.code || 500);
-    res.send({ msg: error.msg });
+    res.send({ msg: error.toString() });
   });
 
 app.listen(port, () => {
