@@ -5,6 +5,6 @@ module.exports = {
     proxy: "http://localhost:3000",
   },
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/docs/1.0/'
+    ? '/docs/'
     : '/'
 };
