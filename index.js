@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
-  .use(express.static("../doc"))
+  .use(express.static("../docs"))
   .use(cors())
   .use(morgan("dev"))
   .use("/", require("./server/routes"))
