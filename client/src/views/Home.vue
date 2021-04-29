@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Feed from "../components/Feed";
-import SpotifyPlayer from "../components/SpotifyPlayer";
+import Feed from "@/components/Feed";
+import SpotifyPlayer from "@/components/SpotifyPlayer";
 
 export default {
   name: "Home",

@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import AddStory from "../components/AddStory";
-import FeedItem from "../components/FeedItem";
+import AddStory from "@/components/AddStory";
+import FeedItem from "@/components/FeedItem";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Feed",

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Timer from "../components/Timer";
+import Timer from "@/components/Timer";
 
 export default {
   name: "Tools",

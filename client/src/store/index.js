@@ -2,7 +2,7 @@ import Vuex from "vuex";
 import Vue from "vue";
 
 import createPersistedState from "vuex-persistedstate";
-import auth from "./modules/auth";
+import auth from "@/store/modules/auth";
 
 // Load Vuex
 Vue.use(Vuex);

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Feed from '../components/Feed'
-import FoodAndExerciseInput from '../components/FoodAndExerciseInput'
+import Feed from '@/components/Feed'
+import FoodAndExerciseInput from '@/components/FoodAndExerciseInput'
 export default {
   name: "Home",
   components: {

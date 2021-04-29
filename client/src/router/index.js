@@ -1,16 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "../store";
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import Signup from "../views/Signup.vue";
-import About from "../views/About.vue";
-import Tools from "../views/Tools.vue";
-import User from "../views/User.vue";
-import BMI from "../views/BMI.vue";
-import Exercise from "../views/Exercise.vue";
-import Food from "../views/Food.vue";
-import People from "../views/People.vue";
+import store from "@/store";
+import Home from "@/views/Home.vue";
+import Login from "@/views/Login.vue";
+import Signup from "@/views/Signup.vue";
+import About from "@/views/About.vue";
+import Tools from "@/views/Tools.vue";
+import User from "@/views/User.vue";
+import BMI from "@/views/BMI.vue";
+import Exercise from "@/views/Exercise.vue";
+import Food from "@/views/Food.vue";
+import People from "@/views/People.vue";
 
 Vue.use(VueRouter);
 

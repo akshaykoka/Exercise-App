@@ -29,7 +29,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import ExcerciseInputComponent from "../components/ExcerciseInputComponent.vue";
+import ExcerciseInputComponent from "@/components/ExcerciseInputComponent.vue";
 export default {
   name: "Exercise",
   components: {

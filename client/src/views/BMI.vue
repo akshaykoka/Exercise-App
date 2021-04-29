@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import BMICalculator from "../components/BMICalculator.vue";
+import BMICalculator from "@/components/BMICalculator.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "BMI",

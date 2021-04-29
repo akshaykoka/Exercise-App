@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import image from "../assets/FitnessFreak.png";
+import image from "@/assets/FitnessFreak.png";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
