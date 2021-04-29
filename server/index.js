@@ -14,12 +14,12 @@ app
   .use(express.static("../docs"))
   .use(cors())
   .use(morgan("dev"))
-  .use("/", require("./server/routes"))
+  .use("/", require("./routes"))
   .use("/uploads", express.static(__dirname + "/uploads"))
 
   // All the way at the end of the pipeline. Return instead of not found
   .get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "/docs/index.html"));
+    res.sendFile(path.join(__dirname, "../docs/index.html"));
   })
 
   .use((error, req, res, next) => {
