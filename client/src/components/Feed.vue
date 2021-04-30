@@ -17,9 +17,7 @@
             <FeedItem :post="post" :key="index" />
           </template>
         </div>
-        <div v-else>
-          Oh no!!! We have no posts
-        </div>
+        <div v-else>Oh no!!! We have no posts</div>
       </div>
       <div v-else>
         <div class="Posts" v-if="Posts">
@@ -27,9 +25,7 @@
             <FeedItem :post="post" :key="index" />
           </template>
         </div>
-        <div v-else>
-          Oh no!!! We have no posts
-        </div>
+        <div v-else>Oh no!!! We have no posts</div>
       </div>
     </div>
   </div>
@@ -57,7 +53,7 @@ export default {
       ).reverse();
     },
   },
-  created: function() {
+  created: function () {
     this.GetPosts();
   },
   components: {

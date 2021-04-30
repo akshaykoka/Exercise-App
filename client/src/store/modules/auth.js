@@ -37,11 +37,9 @@ const actions = {
   },
   async CreatePost({ dispatch, getters }, post) {
     let token = getters.StateToken;
-    console.log(post.get("title"));
     if (token) {
       await axios.post("/posts", post, {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -83,7 +81,6 @@ const actions = {
     );
 
     if (data) await commit("setUser", data);
-    console.log(getters.StateUser);
   },
 
   async RemoveFollower({ commit, getters }, userName) {
@@ -93,7 +90,6 @@ const actions = {
       { headers: { Authorization: `Bearer ${getters.StateToken}` } }
     );
     await commit("setUser", data);
-    console.log(getters.StateUser);
   },
   async UnfollowUser({ commit, getters }, userName) {
     const { data } = await axios.post(
@@ -113,7 +109,6 @@ const actions = {
         },
       });
       await commit("setExercises", data);
-      console.log(getters.exercises);
     }
   },
 
