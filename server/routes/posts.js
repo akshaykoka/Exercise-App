@@ -11,7 +11,7 @@ const app = express.Router();
 app.get("/", getPost);
 app.get("/:post_id", getPostById);
 
-app.post("/", upload.single("file"), addPost);
+app.post("/", addPost);
 
 app.patch("/:post_id", updatePost);
 
