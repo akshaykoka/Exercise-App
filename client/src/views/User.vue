@@ -113,7 +113,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FollowerCard from "@/components/FollowerCard.vue";
+import FollowerCard from "../components/FollowerCard.vue";
 export default {
   components: { FollowerCard },
   name: "User",

@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import FoodInputComponent from "@/components/FoodInputComponent";
+import FoodInputComponent from "../components/FoodInputComponent";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Food",

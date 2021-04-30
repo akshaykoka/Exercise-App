@@ -8,6 +8,10 @@ const userRoutes = require("./users");
 const inputRoutes = require("./inputs");
 
 app
+  .use((req, res, next) => {
+    res.setHeader("Content-Type", "application/json");
+    next();
+  })
   .use("/auth", authRoutes)
   .use("/users", LoginRequired, userRoutes)
   .use("/posts", LoginRequired, postRoutes)

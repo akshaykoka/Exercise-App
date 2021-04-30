@@ -1,8 +1,5 @@
+const path = require("path");
 module.exports = {
   lintOnSave: false,
-  outputDir: "../docs",
-  devServer: {
-    proxy: "http://localhost:3000",
-  },
-  publicPath:  '/'
+  outputDir: path.resolve(__dirname, "../server/public"),
 };

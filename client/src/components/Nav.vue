@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a href="/" class="navbar-item">
-            <img :src="image" width="180" height="84" />
+            <img :src="image" width="120" height="56" />
           </a>
         </div>
         <div class="navbar-menu">
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import image from "@/assets/FitnessFreak.png";
+import image from "../assets/FitnessFreak.png";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -105,6 +105,6 @@ export default {
   width: 100%;
 }
 .navbar-item img {
-  max-height: 6rem !important;
+  max-height: 3rem !important;
 }
 </style>

@@ -4,7 +4,7 @@ const { generateHash } = require("random-hash");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "./uploads/");
   },
   filename: async function (req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {

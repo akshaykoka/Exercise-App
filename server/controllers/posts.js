@@ -13,9 +13,7 @@ const getPostById = (req, res) => {
   }
 };
 const addPost = (req, res) => {
-  if (!req.file) return res.status(400).send("Image is required");
   req.body.userName = req.user.userName;
-  req.body.image = req.file.filename;
   return res.send(posts.Add(req.body));
 };
 const updatePost = (req, res) =>

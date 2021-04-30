@@ -13,7 +13,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import PersonCard from "@/components/PersonCard";
+import PersonCard from "../components/PersonCard";
 export default {
   created: function() {
     this.GetPeople();

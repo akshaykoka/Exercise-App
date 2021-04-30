@@ -137,7 +137,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import img from "@/assets/bg-img.jpg";
+import img from "../assets/bg-img.jpg";
 export default {
   name: "SignUp",
   data() {

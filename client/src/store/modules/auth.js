@@ -37,11 +37,9 @@ const actions = {
   },
   async CreatePost({ dispatch, getters }, post) {
     let token = getters.StateToken;
-    console.log(post.get("title"));
     if (token) {
       await axios.post("/posts", post, {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -57,6 +55,7 @@ const actions = {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data);
       commit("setPosts", response.data);
     }
   },
@@ -197,6 +196,7 @@ const actions = {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(data);
       await commit("setPeople", data);
     }
   },
