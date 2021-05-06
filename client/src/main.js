@@ -5,6 +5,10 @@ import store from "./store";
 import axios from "axios";
 import "bulma";
 import "@fortawesome/fontawesome-free/css/all.css";
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+
+Vue.use(Buefy)
 
 Vue.config.productionTip = false;
 

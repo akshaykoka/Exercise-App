@@ -8,6 +8,7 @@ const state = {
   posts: null,
   token: null,
   people: null,
+  suggestions:null
 };
 const getters = {
   isAuthenticated: (state) => !!state.user,
@@ -18,6 +19,7 @@ const getters = {
   StateFood: (state) => state.food,
   StatePeople: (state) => state.people,
   StateBMI: (state) => state.bmi,
+  StateSuggestions:(state)=>state.suggestions
 };
 
 const actions = {
@@ -195,7 +197,18 @@ const actions = {
       await commit("setPeople", data);
     }
   },
-};
+
+  async GetWorkoutNames({commit,getters},str){
+    let token = getters.StateToken;
+    if (token) {
+      const { data } = await axios.get("/auto/"+str, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      await commit("setAutoComplete",data)
+  }
+}};
 
 const mutations = {
   setUser(state, user) {
@@ -203,6 +216,9 @@ const mutations = {
   },
   setToken(state, token) {
     state.token = token;
+  },
+  setAutoComplete(state,data){
+    state.suggestions = data;
   },
   setPosts(state, posts) {
     state.posts = posts;

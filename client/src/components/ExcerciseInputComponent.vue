@@ -3,10 +3,21 @@
     {{ error }}
     <div class="container">
       <div class="field">
-        <label for class="label">Excercise:</label>
-        <div class="control">
-          <input type="text" class="input" v-model="form.name" />
-        </div>
+        <div class="control"></div>
+       <p class="content"><b>Selected:</b> {{ selected }}</p>
+        <b-field label="Enter Excersise">
+            <b-autocomplete
+                
+                v-model="form.name"
+                :data="items"
+                placeholder="e.g. jQuery"
+                icon="magnify"
+                clearable
+                @keyup="fetchWorkouts"
+                @select="option => selected = option">
+                <template #empty>No results found</template>
+            </b-autocomplete>
+        </b-field>
       </div>
       <div class="field">
         <label for class="label">Calories burnt:</label>
@@ -26,17 +37,18 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions ,mapGetters} from "vuex";
 export default {
   name: "ExcerciseInputComponent",
   data() {
     return {
       form: { name: "", calories: "" },
       error: "",
+      items:[],
     };
   },
   methods: {
-    ...mapActions(["AddExercise"]),
+    ...mapActions(["AddExercise","GetWorkoutNames"]),
     validate() {
       if (this.form.name.length === 0) {
         this.error = " Please enter the exercise";
@@ -47,6 +59,10 @@ export default {
         return false;
       }
       return true;
+    },
+    async fetchWorkouts(event){
+      await this.GetWorkoutNames(this.form.name);
+      this.items = Suggestions;
     },
     async submit() {
       try {
@@ -61,6 +77,9 @@ export default {
       }
     },
   },
+  computed:{
+    ...mapGetters({Suggestions:"StateSuggestions"})
+  }
 };
 </script>
 
