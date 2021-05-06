@@ -1,4 +1,6 @@
 const users = require("./users");
+Autocomplete = require('autocomplete')
+var auto = new Autocomplete()
 const { v4: uuidv4 } = require("uuid");
 
 const list = [
@@ -66,3 +68,17 @@ module.exports.Delete = (exercise_id) => {
   list.splice(exercise_id, 1);
   return exercise;
 };
+
+module.exports.GetPreviousExercises = (userName, searchString) => {
+  const exercises = list.filter(
+    (exercise) =>
+      exercise.userName === userName).map(x => x.name);
+  auto.initialize(exercises);
+  let results = auto.search(searchString);
+  var stringMatches = results.map(function (result) {
+    return result.key
+  })
+
+  return stringMatches;
+
+}
