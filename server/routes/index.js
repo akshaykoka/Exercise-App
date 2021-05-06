@@ -9,10 +9,6 @@ const inputRoutes = require("./inputs");
 const autocompleteRoutes = require("./autocomplete");
 
 app
-  .use((req, res, next) => {
-    res.setHeader("Content-Type", "application/json");
-    next();
-  })
   .use("/auth", authRoutes)
   .use("/users", LoginRequired, userRoutes)
   .use("/posts", LoginRequired, postRoutes)

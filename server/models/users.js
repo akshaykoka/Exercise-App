@@ -6,14 +6,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const list = [
   {
-    firstName: "Moshe",
-    lastName: "Plotkin",
-    userName: "JewPaltz",
-    email: "jewpaltz@123.com",
+    firstName: "Maxy",
+    lastName: "Lawrence",
+    userName: "maxyence",
+    email: "maxyence@gmail.com",
 
-    password: "$2b$08$ovDdePT2UjP9nkMaOhpFgOQEsBclWpB9RfS2p5XZwq.vDIzwNw5ke",
+    password: "$2b$08$12qw32.vDIzwNw5ke",
     isAdmin: true,
-    following: ["vp", "johnsmith"],
+    following: ["lord", "maxyence"],
     followers: [],
   },
   {
@@ -24,14 +24,14 @@ const list = [
 
     password: "Her",
     isAdmin: true,
-    following: ["johnsmith"],
+    following: ["lord"],
     followers: [],
   },
   {
-    firstName: "John",
-    lastName: "Smith",
-    userName: "johnsmith",
-    email: "johnsmith@gmail.com",
+    firstName: "Jimmy",
+    lastName: "Blinder",
+    userName: "lord",
+    email: "jimmy@peakyblinders.com",
 
     password: "BeepBop",
     isAdmin: true,

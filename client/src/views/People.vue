@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="content">
     <h1>People in the site</h1>
     <div class="columns">
@@ -8,7 +9,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 </template>
 
 <script>
@@ -21,7 +22,10 @@ export default {
   components: { PersonCard },
 
   computed: {
-    ...mapGetters({ People: "StatePeople" }),
+    ...mapGetters({ People: "StatePeople",User:"StateUser" }),
+    filteredPeople(){
+      return People.filter(person=>person.handle!==this.User.handle)
+    }
   },
   methods: {
     ...mapActions(["GetPeople"]),

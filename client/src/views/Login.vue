@@ -21,13 +21,13 @@
                         <div class="control has-icons-left">
                           <input
                             type="text"
-                            placeholder="akokaa"
+                            placeholder="maxy"
                             class="input"
                             required
                             v-model="form.userName"
                           />
                           <span class="icon is-small is-left">
-                            <i class="fa fa-envelope"></i>
+                            <i class="fa fa-user"></i>
                           </span>
                         </div>
                       </div>

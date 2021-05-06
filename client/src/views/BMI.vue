@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="panel is-success">
       <div class="panel-heading">
         BMI Calculator

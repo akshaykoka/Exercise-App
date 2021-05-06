@@ -2,19 +2,19 @@ const users = require("./users");
 
 const list = [
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
-    userName: "johnsmith",
+    title: "Benefits of green tea",
+    write_up: "Green tea is packed full of health-promoting compounds. Regularly drinking green tea can help you lose weight and reduce your risk of several diseases, including diabetes, heart disease and cancer. Drinking three to five cups of green tea per day seems to be optimal to reap the most health benefits.",
+    userName: "vp",
   },
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
-    userName: "johnsmith",
+    title: "Why keto diet is bad?",
+    write_up: "The keto diet could cause low blood pressure, kidney stones, constipation, nutrient deficiencies and an increased risk of heart disease. Strict diets like keto could also cause social isolation or disordered eating. Keto is not safe for those with any conditions involving their pancreas, liver, thyroid or gallbladder.",
+    userName: "maxyence",
   },
   {
-    title: "Lorem Ipsom",
-    write_up: "lorem is the best",
-    userName: "johnsmith",
+    title: "How long should you do Keto?",
+    write_up: "Stick to the keto diet for three to six months max, says Mancinelli, noting that some people opt to cycle in and out of the diet throughout the year.",
+    userName: "maxyence",
   },
 ];
 
