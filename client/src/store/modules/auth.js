@@ -57,6 +57,7 @@ const actions = {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data);
       commit("setPosts", response.data);
     }
   },
@@ -194,6 +195,7 @@ const actions = {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(data);
       await commit("setPeople", data);
     }
   },

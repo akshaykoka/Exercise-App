@@ -3,6 +3,7 @@ const fs = require("fs");
 const model = require("../models/users");
 
 const getUser = (req, res) => {
+  console.log(model.GetAll());
   res.json({ users: model.GetAll() });
 };
 const getUserById = (req, res) => res.send(model.Get(req.params.user_id));
